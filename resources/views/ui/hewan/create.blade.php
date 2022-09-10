@@ -4,6 +4,7 @@
     <div class="card">
         <div class="card-header">
             Form Tambah Hewan
+            {{-- add some comment --}}
         </div>
         <div class="card-body">
             <form method="POST" action="{{route("hewan.store")}}" enctype="multipart/form-data">

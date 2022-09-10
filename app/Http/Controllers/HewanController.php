@@ -8,7 +8,8 @@ use App\Model\Hewan;
 class HewanController extends Controller
 {
     public function index(){
-        $data = Hewan::orderBy('id')->get();
+        // $data = Hewan::orderBy('id')->get();
+        // select from redis
         return view('ui.hewan.index', compact(["data"]));
     }
 
@@ -28,6 +29,8 @@ class HewanController extends Controller
                 'jumlah_kaki' => 'required',
             ]);
             Hewan::create($data);
+            // add to redis
+
             return redirect('/hewan')->with('message', 'Data hewan berhasil ditambahkan');
         } catch(\Exception $e) {
             return redirect('/hewan')->with('message', 'Data tidak valid');
@@ -58,6 +61,6 @@ class HewanController extends Controller
     public function destroy(Request $request, $id){
         $hewan = Hewan::findOrFail($id);
         $hewan->delete();
-        return redirect('/hewan')->with('message', 'Data hewan berhasil diupdate');
+        return redirect('/hewan')->with('message', 'Data hewan berhasil dihapus');
     }
 }
